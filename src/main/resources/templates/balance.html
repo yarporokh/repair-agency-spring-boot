@@ -8,11 +8,8 @@
 
 <h2 class="text-center" th:text="#{balance.head}">Balance</h2>
 <div class="d-flex justify-content-center">
-    <form th:action="@{/profile/balance}" th:method="POST">
+    <form th:action="@{/user/balance}" th:method="POST">
         <div class="card" style="width: 18rem;">
-<!--
-            <input type="hidden" th:value="${user.userId}" name="userId">
--->
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><span th:text="#{balance.yourbalance}"/> <span th:text="${user.balance}"/> $
                 </li>
