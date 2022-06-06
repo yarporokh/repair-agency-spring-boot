@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/authstyle.css">
+</head>
+<body>
+<div th:insert="navbar"></div>
+
+<div class="login-form">
+    <form th:action="@{/auth/registration}" th:method="POST">
+        <h2 class="text-center" th:text="#{register.head}">Registration</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" th:placeholder="#{register.firstname}" name="firstName" required="required"
+                   pattern="^[A-Z][a-z]+|[А-ЯІЇҐЄ][а-яіїєґ]+$">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" th:placeholder="#{register.lastname}" name="lastName" required="required"
+                   pattern="^[A-Z][a-z]+|[А-ЯІЇҐЄ][а-яіїєґ]+$">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" th:placeholder="#{register.email}" name="email" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" th:placeholder="#{register.password}" name="password" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" th:placeholder="#{register.cpassword}" name="passwordConfirm"
+                   required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" th:text="#{register.button.register}">Create an account</button>
+        </div>
+    </form>
+    <p class="text-center"><a th:href="@{/auth/login}" th:text="#{register.button.signin}">Sign in</a></p>
+</div>
+</body>
+</html>
