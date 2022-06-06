@@ -37,6 +37,8 @@
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block" th:text="#{register.button.register}">Create an account</button>
         </div>
+        <span class="alert alert-danger" th:if="${passwordError != null}" th:text="#{register.confirm.error}"></span>
+        <span class="alert alert-danger" th:if="${usernameError != null}" th:text="#{register.email.error}"></span>
     </form>
     <p class="text-center"><a th:href="@{/auth/login}" th:text="#{register.button.signin}">Sign in</a></p>
 </div>
