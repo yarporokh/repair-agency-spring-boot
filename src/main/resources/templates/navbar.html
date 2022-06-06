@@ -19,9 +19,9 @@
                         Menu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" th:href="@{profile}"><i class="bi bi-person-circle"></i> <span th:text="#{navbar.profile}"/></a>
+                        <li><a class="dropdown-item" th:href="@{/user/profile}"><i class="bi bi-person-circle"></i> <span th:text="#{navbar.profile}"/></a>
                         </li>
-                        <li th:if="${user.roles.contains(roles[0])}"><a class="dropdown-item" th:href="@{balance}"><i class="bi bi-cash-stack"></i> <span th:text="#{navbar.balance}"/></a>
+                        <li th:if="${user.roles.contains(roles[0])}"><a class="dropdown-item" th:href="@{/user/balance}"><i class="bi bi-cash-stack"></i> <span th:text="#{navbar.balance}"/></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -41,7 +41,7 @@
                     <a class="nav-link active" aria-current="page" href="#" th:text="#{navbar.users}">All users</a>
                 </li>
                 <li class="nav-item" th:if="${user.roles.contains(roles[0])}">
-                    <a class="nav-link active" aria-current="page" href="#"
+                    <a class="nav-link active" aria-current="page" th:href="@{/myapp}"
                        th:text="#{navbar.myapplications}">My applications</a>
                 </li>
             </ul>
