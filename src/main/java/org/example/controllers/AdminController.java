@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
+@PreAuthorize("hasAuthority('MANAGER')")
 @RequestMapping("/admin")
 public class AdminController {
     private final AuthService authService;
@@ -21,7 +22,6 @@ public class AdminController {
         this.authService = authService;
     }
 
-    @PreAuthorize("hasAuthority('MANAGER')")
     @GetMapping("/create")
     public String getCreationPage() {
         return "createUser";
