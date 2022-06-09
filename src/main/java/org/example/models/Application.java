@@ -13,10 +13,11 @@ public class Application {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private int applicationId;
+    private Long applicationId;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
 
     @Column(name = "text")
     private String text;
@@ -33,8 +34,9 @@ public class Application {
     @Column(name = "progress")
     private String progress;
 
-    @Column(name = "serviceman_id")
-    private int servicemanEmail;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "serviceman_id")
+    private User serviceman;
 
     @Column(name = "response_text")
     private String responseText;
