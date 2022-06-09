@@ -37,7 +37,7 @@ public class ProfileController {
     public String topUpBalance(Model model, @RequestParam("addBalance") double balance) {
         User user = (User) model.getAttribute("user");
         assert user != null;
-        userService.saveUserBalance(user, balance);
+        userService.balanceTopUp(user, balance);
         return "redirect:/user/profile";
     }
 }
