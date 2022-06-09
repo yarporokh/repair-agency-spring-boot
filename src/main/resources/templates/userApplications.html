@@ -1,12 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>User application</title>
+    <title>My applications</title>
 </head>
 <body>
 <div th:insert="navbar"></div>
 
+<h2 class="text-center" th:text="#{userapp.head}">My applications</h2>
+<div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appModal">
+        <i class="bi bi-clipboard-plus"></i> <span th:text="#{userapp.button.create}"/>
+    </button>
+</div>
+
+<div>
+
+    <table class="table table-striped" style="user-select: none;">
+        <thead>
+        <tr>
+            <th><span th:text="#{userapp.id}"/></th>
+            <th><span th:text="#{userapp.text}"/></th>
+            <th><span th:text="#{userapp.date}"/></th>
+            <th><span th:text="#{userapp.serviceman}"/></th>
+            <th><span th:text="#{userapp.price}"/></th>
+            <th><span th:text="#{userapp.paymentstatus}"/></th>
+            <th><span th:text="#{userapp.progress}"/></th>
+            <th><span th:text="#{userapp.response}"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="app : ${applicationList}">
+            <td th:text="${app.applicationId}"></td>
+            <td th:text="${app.text}"></td>
+            <td th:text="${app.date}"></td>
+            <td><div th:if="${app.serviceman != null}"><span th:text="${app.serviceman.firstName}"/> <span th:text="${app.serviceman.lastName}"/></div></td>
+            <td><span th:text="${app.price}"/></td>
+            <td th:text="${app.paymentStatus}"></td>
+            <td th:text="${app.progress}"></td>
+            <td><span th:text="${app.responseText}"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
 
 </body>
 </html>
+
+
+<!-- Create Application Modal -->
+<div class="modal fade" id="appModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" th:text="#{userapp.modal.application.head}">Create application</h5>
+                <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form th:action="@{/add}" th:method="POST">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="app-text" class="col-form-label" th:text="#{userapp.modal.application.applicationtext}">Text</label>
+                            <textarea class="form-control" id="app-text" name="applicationText" rows="7" maxlength=999
+                                      style="resize: none;" required="required"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{userapp.modal.application.button.close}">Close</button>
+                        <button type="submit" class="btn btn-primary" th:text="#{userapp.modal.application.button.add}">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

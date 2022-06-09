@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All applications</title>
+</head>
+<body>
+<div th:insert="navbar"></div>
+<h2 class="text-center" th:text="#{allapp.head}">All applications</h2>
+
+<table id="applicationTable" class="table table-hover" style="user-select: none;">
+    <thead>
+    <tr>
+        <th scope="col" th:text="#{allapp.id}"></th>
+        <th scope="col" th:text="#{allapp.email}"></th>
+        <th scope="col" th:text="#{allapp.text}"></th>
+        <th scope="col" th:text="#{allapp.date}"></th>
+        <th scope="col" th:text="#{allapp.serviceman}"></th>
+        <th scope="col" th:text="#{allapp.price}"></th>
+        <th scope="col" th:text="#{allapp.paymentstatus}"></th>
+        <th scope="col" th:text="#{allapp.progress}"></th>
+        <th scope="col" th:text="#{allapp.response}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="app : ${applicationList}">
+        <td th:text="${app.applicationId}"></td>
+        <td th:text="${app.author.email}"></td>
+        <td th:text="${app.text}"></td>
+        <td th:text="${app.date}"></td>
+        <td>
+            <div th:if="${app.serviceman != null}"><span th:text="${app.serviceman.firstName}"/> <span
+                    th:text="${app.serviceman.lastName}"/></div>
+        </td>
+        <td><span th:text="${app.price}"/></td>
+        <td th:text="${app.paymentStatus}"></td>
+        <td th:text="${app.progress}"></td>
+        <td><span th:text="${app.responseText}"/></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
