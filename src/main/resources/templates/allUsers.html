@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="navbar"></div>
+
+<h2 class="text-center" th:text="#{users.head}">Users</h2>
+<table id="userTable" class="table table-hover" style="user-select: none;">
+    <thead>
+    <tr>
+        <th scope="col" th:text="#{users.firstname}">First name</th>
+        <th scope="col" th:text="#{users.lastname}">Last name</th>
+        <th scope="col" th:text="#{users.email}">Email</th>
+        <th scope="col" th:text="#{users.balance}">Balance</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${list}" data-toggle="modal" th:attr="data-target='#itemModal'+${item.userId}"
+        style="cursor: pointer;">
+        <td th:text="${item.firstName}"/>
+        <td th:text="${item.lastName}"/>
+        <td th:text="${item.email}"/>
+        <td th:text="${item.balance}"/>
+
+        <!-- Modal -->
+        <div class="modal fade" th:id="'itemModal'+${item.userId}" tabindex="-1"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form th:action="@{/management/balance}" th:method="POST">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id='exampleModalLabel' th:text="#{users.modal.head}">Head</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><span th:text="#{users.modal.fullname}"/> <span
+                                        th:text="${item.firstName}"/> <span th:text="${item.lastName}"/>
+                                </li>
+                                <li class="list-group-item"><span th:text="#{users.modal.email}"/> <span
+                                        th:text="${item.email}"/>
+                                </li>
+                                <li class="list-group-item"><span th:text="#{users.modal.balance}"/>
+                                    <span th:text="${item.balance}"/> $
+                                    <input type="number" name="newBalance" step="0.01"
+                                           th:min="${item.balance}" th:value="${item.balance}">
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="modal-footer">
+                            <input type="hidden" th:value="${item.userId}" name="itemId">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    th:text="#{users.modal.button.close}">Close
+                            </button>
+                            <button type="submit" class="btn btn-primary" th:text="#{users.modal.button.save}">Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+
+
+<!--
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+</button>
+
+&lt;!&ndash; Modal &ndash;&gt;
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>-->
