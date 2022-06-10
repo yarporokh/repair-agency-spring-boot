@@ -7,13 +7,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import static org.example.utils.ApplicationConstants.*;
+
 @ControllerAdvice
 public class GlobalControllerAdvice {
     @ModelAttribute("user")
     public User userModel() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        return user;
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            return (User) authentication.getPrincipal();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @ModelAttribute("roles")
