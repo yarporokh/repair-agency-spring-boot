@@ -53,4 +53,9 @@ public class ApplicationService implements IApplicationService {
     public List<Application> findAll() {
         return (List<Application>) applicationRepository.findAll();
     }
+
+    @Override
+    public void save(Application application) {
+        applicationRepository.save(application);
+    }
 }
