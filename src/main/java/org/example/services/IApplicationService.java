@@ -15,4 +15,7 @@ public interface IApplicationService {
 
     @Transactional
     List<Application> findAll();
+
+    @Transactional
+    void save(Application application);
 }
