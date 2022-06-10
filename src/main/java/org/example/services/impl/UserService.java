@@ -1,5 +1,6 @@
 package org.example.services.impl;
 
+import org.example.models.Application;
 import org.example.models.User;
 import org.example.repository.UserRepository;
 import org.example.services.IUserService;
@@ -52,5 +53,11 @@ public class UserService implements IUserService {
         userRepository.save(user);
     }
 
-
+    @Override
+    @Transactional
+    public void payApp(User user, Application app) {
+        double userBalance = user.getBalance();
+        double afterPayBalance = userBalance - app.getPrice();
+        saveNewUserBalance(user, afterPayBalance);
+    }
 }

@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.models.Application;
 import org.example.models.User;
 import org.example.utils.Role;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,4 +23,7 @@ public interface IUserService extends UserDetailsService {
 
     @Transactional
     void saveNewUserBalance(User user, double newBalance);
+
+    @Transactional
+    void payApp(User user, Application app);
 }

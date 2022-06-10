@@ -2,6 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My applications</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div th:insert="navbar"></div>
@@ -33,11 +42,58 @@
             <td th:text="${app.applicationId}"></td>
             <td th:text="${app.text}"></td>
             <td th:text="${app.date}"></td>
-            <td><div th:if="${app.serviceman != null}"><span th:text="${app.serviceman.firstName}"/> <span th:text="${app.serviceman.lastName}"/></div></td>
-            <td><span th:text="${app.price}"/></td>
+            <td>
+                <div th:if="${app.serviceman != null}"><span th:text="${app.serviceman.firstName}"/> <span
+                        th:text="${app.serviceman.lastName}"/></div>
+            </td>
+            <td><span th:text="${app.price}"/>
+                <form th:action="@{/pay}" th:method="POST"
+                      th:if="${app.paymentStatus.equals(expected) && app.price > 0}">
+                    <input type="hidden" th:value="${app.applicationId}" name="appId">
+                    <button type="submit" class="btn btn-primary"
+                            th:text="#{userapp.pay}">
+                        Pay
+                    </button>
+                </form>
+            </td>
             <td th:text="${app.paymentStatus}"></td>
             <td th:text="${app.progress}"></td>
-            <td><span th:text="${app.responseText}"/></td>
+            <td><span th:text="${app.responseText}"/>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            th:if="${app.responseText == null && app.progress.equals(done)}"
+                            th:data-target="'#responseModal'+${app.applicationId}" th:text="#{userapp.response}">Response
+                    </button>
+            </td>
+
+            <!-- Response Modal -->
+            <div class="modal fade" th:id="'responseModal'+${app.applicationId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="responseModalLabel" th:text="#{userapp.response}">Response</h5>
+                            <button type="reset" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form th:action="@{/response}" th:method="POST">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="resp-text" class="col-form-label" th:text="#{userapp.modal.response.responsetext}"></label>
+                                        <textarea class="form-control" id="resp-text" name="responseText" rows="7" maxlength=999
+                                                  style="resize: none;" required="required"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="appId" th:value="${app.applicationId}">
+                                    <button type="reset" class="btn btn-secondary" data-dismiss="modal" th:text="#{userapp.modal.response.button.close}">Close</button>
+                                    <button type="submit" class="btn btn-primary" th:text="#{userapp.modal.response.leaveresponse}">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </tr>
         </tbody>
     </table>
@@ -54,7 +110,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" th:text="#{userapp.modal.application.head}">Create application</h5>
+                <h5 class="modal-title" id="exampleModalLabel" th:text="#{userapp.modal.application.head}">Create
+                    application</h5>
                 <button type="reset" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -62,14 +119,19 @@
                 <form th:action="@{/add}" th:method="POST">
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="app-text" class="col-form-label" th:text="#{userapp.modal.application.applicationtext}">Text</label>
+                            <label for="app-text" class="col-form-label"
+                                   th:text="#{userapp.modal.application.applicationtext}">Text</label>
                             <textarea class="form-control" id="app-text" name="applicationText" rows="7" maxlength=999
                                       style="resize: none;" required="required"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{userapp.modal.application.button.close}">Close</button>
-                        <button type="submit" class="btn btn-primary" th:text="#{userapp.modal.application.button.add}">Add</button>
+                        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal"
+                                th:text="#{userapp.modal.application.button.close}">Close
+                        </button>
+                        <button type="submit" class="btn btn-primary" th:text="#{userapp.modal.application.button.add}">
+                            Add
+                        </button>
                     </div>
                 </form>
             </div>
