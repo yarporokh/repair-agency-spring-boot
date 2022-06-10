@@ -99,8 +99,7 @@
                                                                     && user.roles.contains(roles[2])
                                                                     && app.paymentStatus.equals(payment[2])}">
                                     <select name="setServiceman">
-                                        <option selected th:value="${null}">None</option>
-                                        <option th:each="serviceman: ${servicemanList}" th:value="${serviceman}"><span
+                                        <option th:each="serviceman: ${servicemanList}" th:value="${serviceman.userId}"><span
                                                 th:text="${serviceman.email}"/></option>
                                     </select>
                                     <input type="hidden" th:value="${app.applicationId}" name="appId">
