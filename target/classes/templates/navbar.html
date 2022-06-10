@@ -34,7 +34,7 @@
                     </ul>
                 </li>
                 <li class="nav-item" th:if="${!user.roles.contains(roles[0])}">
-                    <a class="nav-link active" aria-current="page" href="#"
+                    <a class="nav-link active" aria-current="page" th:href="@{/management/allapps}"
                        th:text="#{navbar.allapplications}">All applications</a>
                 </li>
                 <li class="nav-item" th:if="${user.roles.contains(roles[2])}">
@@ -44,7 +44,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/admin/create}" th:text="#{navbar.create.user}">Create user</a>
                 </li>
                 <li class="nav-item" th:if="${user.roles.contains(roles[0])}">
-                    <a class="nav-link active" aria-current="page" th:href="@{/myapp}"
+                    <a class="nav-link active" aria-current="page" th:href="@{/myapps}"
                        th:text="#{navbar.myapplications}">My applications</a>
                 </li>
             </ul>
