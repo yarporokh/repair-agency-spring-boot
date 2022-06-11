@@ -15,7 +15,7 @@ public class Application {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long applicationId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
 
@@ -34,7 +34,7 @@ public class Application {
     @Column(name = "progress")
     private String progress;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "serviceman_id")
     private User serviceman;
 
