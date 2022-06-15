@@ -16,13 +16,13 @@
 <div class="d-flex justify-content-center">
     <div class="card" style="width: 18rem;">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"> <span th:text="#{profile.fullname}"/> <span th:text="${user.firstName}"/> <span th:text="${user.lastName}"/>
+            <li class="list-group-item"> <span th:text="|#{profile.fullname} ${user.firstName} ${user.lastName}|"/>
             </li>
-            <li class="list-group-item"> <span th:text="#{profile.email}"/> <span th:text="${user.email}"/>
+            <li class="list-group-item"> <span th:text="|#{profile.email} ${user.email}|"/>
             </li>
-            <li th:if="${user.roles.contains(roles[0])}" class="list-group-item"> <span th:text="#{profile.balance}"/> <span th:text="${user.balance}"/> <span>$</span>
+            <li th:if="${user.roles.contains(roles[0])}" class="list-group-item"> <span th:text="|#{profile.balance} ${user.balance} |"/><span>$</span>
             </li>
-            <li class="list-group-item"> <span th:text="#{profile.role}"/> <span th:text="${user.roles}"></span>
+            <li class="list-group-item"> <span th:text="|#{profile.role} ${user.roles.iterator().next()}|"/>
             </li>
         </ul>
     </div>

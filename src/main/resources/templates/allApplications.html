@@ -54,7 +54,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
-                            <span th:text="#{allapp.modal.head}"/> <span th:text="${app.applicationId}"/>
+                            <span th:text="|#{allapp.modal.head} ${app.applicationId}|"/>
                         </h5>
                         <button type="button" class="btn-close" data-dismiss="modal"
                                 aria-label="Close"></button>
@@ -62,10 +62,10 @@
                     <div class="modal-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <span th:text="#{allapp.text}"/>: <span th:text="${app.text}"/>
+                                <span th:text="|#{allapp.text}: ${app.text.text}|"/>
                             </li>
                             <li class="list-group-item">
-                                <span th:text="#{allapp.price}"/>: <span th:text="${app.price}"/>
+                                <span th:text="|#{allapp.price}: ${app.price}|"/>
                                 <form th:action="@{/management/setPrice}" th:method="POST"
                                       th:if="${app.price == 0.0
                                                                 && user.roles.contains(roles[2])
@@ -120,7 +120,7 @@
 
                             </li>
                             <li class="list-group-item">
-                                <span th:text="#{allapp.progress}"/>: <span th:text="${app.progress}"/>
+                                <span th:text="|#{allapp.progress}: ${app.progress}|"/>
                                 <form th:action="@{/management/changeProgress}" th:method="POST"
                                       th:if="${user == app.serviceman}">
                                     <select name="changeProgress">

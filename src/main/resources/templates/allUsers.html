@@ -47,14 +47,11 @@
                         </div>
                         <div class="modal-body">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><span th:text="#{users.modal.fullname}"/> <span
-                                        th:text="${item.firstName}"/> <span th:text="${item.lastName}"/>
+                                <li class="list-group-item"><span th:text="|#{users.modal.fullname} ${item.firstName} ${item.lastName}|"/>
                                 </li>
-                                <li class="list-group-item"><span th:text="#{users.modal.email}"/> <span
-                                        th:text="${item.email}"/>
+                                <li class="list-group-item"><span th:text="|#{users.modal.email} ${item.email}|"/>
                                 </li>
-                                <li class="list-group-item"><span th:text="#{users.modal.balance}"/>
-                                    <span th:text="${item.balance}"/> $
+                                <li class="list-group-item"><span th:text="|#{users.modal.balance} ${item.balance}|"/>$
                                     <input type="number" name="newBalance" step="0.01"
                                            th:min="${item.balance}" th:value="${item.balance}">
                                 </li>
