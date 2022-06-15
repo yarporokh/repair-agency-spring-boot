@@ -65,7 +65,7 @@ public class UserApplicationController {
         if (user.getBalance() < application.getPrice())
             return "redirect:/user/balance";
 
-
+        userService.payApp(user, application);
 
         application.setPaymentStatus(PAYMENT_STATUS_PAID);
         applicationService.save(application);
