@@ -19,8 +19,13 @@ public class Application {
     @JoinColumn(name = "user_id")
     private User author;
 
-    @Column(name = "text")
-    private String text;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "application_text",
+            joinColumns = @JoinColumn(name = "application_id"),
+            inverseJoinColumns = @JoinColumn(name = "text_id")
+    )
+    private Text text;
 
     @Column(name = "price")
     private double price;
@@ -38,6 +43,11 @@ public class Application {
     @JoinColumn(name = "serviceman_id")
     private User serviceman;
 
-    @Column(name = "response_text")
-    private String responseText;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "application_response",
+            joinColumns = @JoinColumn(name = "application_id"),
+            inverseJoinColumns = @JoinColumn(name = "text_id")
+    )
+    private Text responseText;
 }

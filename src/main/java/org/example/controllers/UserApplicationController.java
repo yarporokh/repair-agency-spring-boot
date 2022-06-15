@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 import org.example.models.Application;
+import org.example.models.Text;
 import org.example.models.User;
 import org.example.services.impl.ApplicationService;
 import org.example.services.impl.UserService;
@@ -48,7 +49,9 @@ public class UserApplicationController {
     @PostMapping("/response")
     public String addResponse(@RequestParam("appId") Application application,
                               @RequestParam("responseText") String responseText) {
-        application.setResponseText(responseText);
+        Text t = new Text();
+        t.setText(responseText);
+        application.setResponseText(t);
         applicationService.save(application);
         return "redirect:/myapps";
     }

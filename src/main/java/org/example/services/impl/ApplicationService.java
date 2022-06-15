@@ -1,6 +1,7 @@
 package org.example.services.impl;
 
 import org.example.models.Application;
+import org.example.models.Text;
 import org.example.models.User;
 import org.example.repository.ApplicationRepository;
 import org.example.services.IApplicationService;
@@ -39,7 +40,9 @@ public class ApplicationService implements IApplicationService {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
 
-        application.setText(text);
+        Text t = new Text();
+        t.setText(text);
+        application.setText(t);
         application.setAuthor(author);
         application.setProgress(PROGRESS_NOT_STARTED);
         application.setPaymentStatus(PAYMENT_STATUS_EXPECTED);

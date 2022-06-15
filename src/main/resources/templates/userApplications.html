@@ -40,7 +40,7 @@
         <tbody>
         <tr th:each="app : ${applicationList}">
             <td th:text="${app.applicationId}"></td>
-            <td th:text="${app.text}"></td>
+            <td th:text="${app.text.text}"></td>
             <td th:text="${app.date}"></td>
             <td>
                 <div th:if="${app.serviceman != null}"><span th:text="${app.serviceman.firstName}"/> <span
@@ -58,7 +58,7 @@
             </td>
             <td th:text="${app.paymentStatus}"></td>
             <td th:text="${app.progress}"></td>
-            <td><span th:text="${app.responseText}"/>
+            <td><span th:if="${app.responseText != null}" th:text="${app.responseText.text}"/>
                     <button type="button" class="btn btn-primary" data-toggle="modal"
                             th:if="${app.responseText == null && app.progress.equals(done)}"
                             th:data-target="'#responseModal'+${app.applicationId}" th:text="#{userapp.response}">Response

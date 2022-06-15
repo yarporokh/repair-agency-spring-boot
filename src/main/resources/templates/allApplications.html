@@ -35,7 +35,7 @@
         style="cursor: pointer;">
         <td th:text="${app.applicationId}"></td>
         <td th:text="${app.author.email}"></td>
-        <td th:text="${app.text}"></td>
+        <td th:text="${app.text.text}"></td>
         <td th:text="${app.date}"></td>
         <td>
             <div th:if="${app.serviceman != null}"><span th:text="${app.serviceman.firstName}"/> <span
@@ -44,7 +44,7 @@
         <td><span th:text="${app.price}"/></td>
         <td th:text="${app.paymentStatus}"></td>
         <td th:text="${app.progress}"></td>
-        <td><span th:text="${app.responseText}"/></td>
+        <td><span th:if="${app.responseText != null}" th:text="${app.responseText.text}"/></td>
 
         <!-- Modal -->
         <div class="modal fade" th:id="'appModal'+${app.applicationId}" tabindex="-1"
