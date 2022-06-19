@@ -170,13 +170,13 @@
 
 <div th:if="${totalPages > 1}">
     <a th:if="${currentPage > 1}"
-       th:href="@{'/management/allapps/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">First</a>
-    <span th:unless="${currentPage > 1}">First</span>
+       th:href="@{'/management/allapps/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" th:text="#{allapp.pagin.firstpage}">First</a>
+    <span th:unless="${currentPage > 1}" th:text="#{allapp.pagin.firstpage}">First</span>
 
 
     <a th:if="${currentPage > 1}"
-       th:href="@{'/management/allapps/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
-    <span th:unless="${currentPage > 1}">Previous</span>
+       th:href="@{'/management/allapps/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" th:text="#{allapp.pagin.prevpage}">Previous</a>
+    <span th:unless="${currentPage > 1}" th:text="#{allapp.pagin.prevpage}">Previous</span>
 
     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
 			<a th:if="${currentPage != i}"
@@ -186,12 +186,12 @@
 		</span>
 
     <a th:if="${currentPage < totalPages}"
-       th:href="@{'/management/allapps/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-    <span th:unless="${currentPage < totalPages}">Next</span>
+       th:href="@{'/management/allapps/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" th:text="#{allapp.pagin.nextpage}">Next</a>
+    <span th:unless="${currentPage < totalPages}" th:text="#{allapp.pagin.nextpage}">Next</span>
 
     <a th:if="${currentPage < totalPages}"
-       th:href="@{'/management/allapps/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-    <span th:unless="${currentPage < totalPages}">Last</span>
+       th:href="@{'/management/allapps/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" th:text="#{allapp.pagin.lastpage}">Last</a>
+    <span th:unless="${currentPage < totalPages}" th:text="#{allapp.pagin.lastpage}">Last</span>
 </div>
 </body>
 </html>
