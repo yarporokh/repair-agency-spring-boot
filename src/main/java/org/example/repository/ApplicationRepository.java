@@ -9,5 +9,10 @@ import java.util.List;
 
 @Repository
 public interface ApplicationRepository extends PagingAndSortingRepository<Application, Long> {
+    /**
+     * Method returns list of users applications
+     * @param author user model
+     * @return list of applications
+     */
     List<Application> findApplicationByAuthor(User author);
 }

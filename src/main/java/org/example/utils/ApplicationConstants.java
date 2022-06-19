@@ -1,5 +1,8 @@
 package org.example.utils;
 
+/**
+ * ApplicationConstants constants for application
+ */
 public class ApplicationConstants {
     //Progress
     public static final String PROGRESS_NOT_STARTED = "Not started";
