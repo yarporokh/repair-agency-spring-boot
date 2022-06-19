@@ -7,6 +7,10 @@ import org.example.repository.ApplicationRepository;
 import org.example.services.IApplicationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,8 +57,13 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public List<Application> findAll() {
-        return (List<Application>) applicationRepository.findAll();
+    public Page<Application> findAll(int pageNum, String sortField, String sortDir) {
+        Pageable pageable = PageRequest.of(pageNum - 1, 5,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending()
+                        : Sort.by(sortField).descending()
+        );
+
+        return applicationRepository.findAll(pageable);
     }
 
     @Override

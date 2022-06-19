@@ -34,7 +34,7 @@
                     </ul>
                 </li>
                 <li class="nav-item" th:if="${!user.roles.contains(roles[0])}">
-                    <a class="nav-link active" aria-current="page" th:href="@{/management/allapps}"
+                    <a class="nav-link active" aria-current="page" th:href="@{/management/allapps/1?sortField=applicationId&sortDir=asc}"
                        th:text="#{navbar.allapplications}">All applications</a>
                 </li>
                 <li class="nav-item" th:if="${user.roles.contains(roles[2])}">

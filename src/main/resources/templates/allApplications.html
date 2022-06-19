@@ -19,15 +19,33 @@
 <table id="applicationTable" class="table table-hover" style="user-select: none;">
     <thead>
     <tr>
-        <th scope="col" th:text="#{allapp.id}"></th>
-        <th scope="col" th:text="#{allapp.email}"></th>
-        <th scope="col" th:text="#{allapp.text}"></th>
-        <th scope="col" th:text="#{allapp.date}"></th>
-        <th scope="col" th:text="#{allapp.serviceman}"></th>
-        <th scope="col" th:text="#{allapp.price}"></th>
-        <th scope="col" th:text="#{allapp.paymentstatus}"></th>
-        <th scope="col" th:text="#{allapp.progress}"></th>
-        <th scope="col" th:text="#{allapp.response}"></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=applicationId&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.id}"/></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=author.email&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.email}"/></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=text.text&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.text}"/></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.date}"/></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=serviceman.email&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.serviceman}"/></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.price}"/></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=paymentStatus&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.paymentstatus}"/></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=progress&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.progress}"/></th>
+        <th scope="col"><a
+                th:href="@{'/management/allapps/' + ${currentPage} + '?sortField=responseText.text&sortDir=' + ${reverseSortDir}}"
+                th:text="#{allapp.response}"/></th>
     </tr>
     </thead>
     <tbody>
@@ -149,5 +167,31 @@
     </tr>
     </tbody>
 </table>
+
+<div th:if="${totalPages > 1}">
+    <a th:if="${currentPage > 1}"
+       th:href="@{'/management/allapps/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">First</a>
+    <span th:unless="${currentPage > 1}">First</span>
+
+
+    <a th:if="${currentPage > 1}"
+       th:href="@{'/management/allapps/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+    <span th:unless="${currentPage > 1}">Previous</span>
+
+    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+			<a th:if="${currentPage != i}"
+               th:href="@{'/management/allapps/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+			<span th:unless="${currentPage != i}">[[${i}]]</span>
+			&nbsp;
+		</span>
+
+    <a th:if="${currentPage < totalPages}"
+       th:href="@{'/management/allapps/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+    <span th:unless="${currentPage < totalPages}">Next</span>
+
+    <a th:if="${currentPage < totalPages}"
+       th:href="@{'/management/allapps/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+    <span th:unless="${currentPage < totalPages}">Last</span>
+</div>
 </body>
 </html>
