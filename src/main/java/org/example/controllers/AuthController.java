@@ -6,7 +6,6 @@ import org.example.utils.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +30,8 @@ public class AuthController {
 
 
     @PostMapping("/registration")
-    public String signUp(@RequestParam("passwordConfirm") String passwordConfirm, @Valid UserDTO userDTO,
-                         BindingResult bindingResult,
+    public String signUp(@RequestParam("passwordConfirm") String passwordConfirm,
+                         @Valid UserDTO userDTO,
                          Model model
     ) {
 
