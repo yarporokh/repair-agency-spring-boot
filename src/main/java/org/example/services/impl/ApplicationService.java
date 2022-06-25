@@ -1,11 +1,11 @@
 package org.example.services.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.models.Application;
 import org.example.models.Text;
 import org.example.models.User;
 import org.example.repository.ApplicationRepository;
 import org.example.services.IApplicationService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,14 +20,13 @@ import java.util.List;
 import static org.example.utils.ApplicationConstants.*;
 
 @Service
+@Slf4j
 public class ApplicationService implements IApplicationService {
     private final ApplicationRepository applicationRepository;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public ApplicationService(ApplicationRepository applicationRepository, ModelMapper modelMapper) {
+    public ApplicationService(ApplicationRepository applicationRepository) {
         this.applicationRepository = applicationRepository;
-        this.modelMapper = modelMapper;
     }
 
 
@@ -53,6 +52,7 @@ public class ApplicationService implements IApplicationService {
         application.setDate(date);
         application.setPrice(BASE_PRICE);
 
+        log.debug("Created new application: {}", application);
         applicationRepository.save(application);
     }
 
@@ -68,6 +68,7 @@ public class ApplicationService implements IApplicationService {
 
     @Override
     public void save(Application application) {
+        log.debug("Saved application: {}", application);
         applicationRepository.save(application);
     }
 }

@@ -1,5 +1,6 @@
 package org.example.services.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.dto.UserDTO;
 import org.example.models.User;
 import org.example.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 
 @Service
+@Slf4j
 public class AuthService implements IAuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -38,6 +40,8 @@ public class AuthService implements IAuthService {
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setBalance(UserConstants.BASE_BALANCE);
         user.setRoles(Collections.singleton(role));
+
+        log.debug("Registered new user: {}", user);
         userRepository.save(user);
         return true;
     }

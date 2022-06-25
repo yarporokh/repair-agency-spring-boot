@@ -1,5 +1,6 @@
 package org.example.services.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.models.Application;
 import org.example.models.User;
 import org.example.repository.UserRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 
 
 @Service
+@Slf4j
 public class UserService implements IUserService {
     @Autowired
     UserRepository userRepository;
@@ -28,6 +30,7 @@ public class UserService implements IUserService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
+        log.debug("Logged: {}", user);
         return user;
     }
 
@@ -36,6 +39,7 @@ public class UserService implements IUserService {
     public void balanceTopUp(User user, double balance) {
         double userBalance = user.getBalance();
         user.setBalance(userBalance + balance);
+        log.debug("Top up balance for user: {}", user);
         userRepository.save(user);
     }
 
@@ -50,6 +54,7 @@ public class UserService implements IUserService {
     @Transactional
     public void saveNewUserBalance(User user, double newBalance) {
         user.setBalance(newBalance);
+        log.debug("Balance changed for user: {}", user);
         userRepository.save(user);
     }
 
@@ -58,6 +63,7 @@ public class UserService implements IUserService {
     public void payApp(User user, Application app) {
         double userBalance = user.getBalance();
         double afterPayBalance = userBalance - app.getPrice();
+        log.debug("User: {} payed for application: {}", user, app);
         saveNewUserBalance(user, afterPayBalance);
     }
 }
