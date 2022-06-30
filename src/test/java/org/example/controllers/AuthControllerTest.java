@@ -5,13 +5,15 @@ import org.example.services.impl.AuthService;
 import org.example.utils.Role;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.ui.Model;
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
 class AuthControllerTest {
 
